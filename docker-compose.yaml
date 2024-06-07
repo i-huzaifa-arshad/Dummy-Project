@@ -1,11 +1,18 @@
 services:
+    db:
+        image: ankane/pgvector
+        env_file:
+        - ./.env
+        volumes:
+        - pgvector_db_data:/var/lib/postgresql/data
+
     app:
         build: .
         network_mode: host
         command: python manage.py runserver
 
     ddagent:
-          image: datadog/docker-dd-agent
+          image: datadog/docker-dd-agent:latest
           environment:
               - DD_BIND_HOST=0.0.0.0
               - DD_API_KEY=${DATADOG_API_KEY}
@@ -13,3 +20,6 @@ services:
               - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
           ports:
               - "8127:8126"
+
+volumes:
+  pgvector_db_data:
