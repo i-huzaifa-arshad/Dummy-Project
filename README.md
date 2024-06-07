@@ -11,7 +11,7 @@ git clone https://github.com/i-huzaifa-arshad/Dummy-Project
 Navigate to the 'cool_counters' Django project:
 
 ```
-cd simple-django-app/cool_counters
+cd Dummy-Project/cool_counters
 ```
 
 Run migrations to update/create database
