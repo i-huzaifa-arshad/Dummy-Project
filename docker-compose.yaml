@@ -1,0 +1,15 @@
+services:
+    app:
+        build: .
+        network_mode: host
+        command: python manage.py runserver
+
+    ddagent:
+          image: datadog/docker-dd-agent
+          environment:
+              - DD_BIND_HOST=0.0.0.0
+              - DD_API_KEY=${DATADOG_API_KEY}
+              - DD_APM_RECEIVER_SOCKET=/tmp/ddagent/trace.sock
+              - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+          ports:
+              - "8127:8126"

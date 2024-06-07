@@ -1,0 +1,4 @@
+Django
+datadog
+ddtrace
+environs
