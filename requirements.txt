@@ -2,3 +2,5 @@ Django
 datadog
 ddtrace
 environs
+dj-database-url
+psycopg2-binary

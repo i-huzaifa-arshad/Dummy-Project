@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from datadog import initialize
+from environs import Env
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -74,12 +79,7 @@ WSGI_APPLICATION = 'cool_counters.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 
 
 # Password validation
@@ -121,14 +121,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-
-from environs import Env
-from datadog import initialize
-
-
-env = Env()
-env.read_env()
-
 if not DEBUG and env.str("DATADOG_API_KEY"):
     DATADOG_OPTIONS = {
         "api_key": env.str("DATADOG_API_KEY"),
@@ -138,3 +130,5 @@ if not DEBUG and env.str("DATADOG_API_KEY"):
     }
 
     initialize(**DATADOG_OPTIONS)
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
