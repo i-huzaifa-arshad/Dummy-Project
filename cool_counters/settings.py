@@ -126,7 +126,7 @@ if not DEBUG and env.str("DATADOG_API_KEY"):
     DATADOG_OPTIONS = {
         "api_key": env.str("DATADOG_API_KEY"),
         "app_key": env.str("DATADOG_APP_KEY"),
-        "statsd_host": "172.17.0.1",
+        "statsd_host": env.str("STATSD_HOST"),
         "statsd_port": env.int("STATSD_PORT"),
     }
 
