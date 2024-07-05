@@ -8,7 +8,6 @@ services:
 
     app:
         build: .
-        network_mode: host
         command: python manage.py runserver
 
     ddagent:
